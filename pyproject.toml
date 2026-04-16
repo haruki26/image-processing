@@ -1,0 +1,18 @@
+[project]
+name = "image-processing"
+version = "0.1.0"
+requires-python = ">=3.14"
+
+[tool.uv.sources]
+tutorial = { workspace = true }
+
+[tool.uv.workspace]
+members = [
+    "packages/*",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.10",
+    "ty>=0.0.31",
+]
