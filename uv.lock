@@ -5,6 +5,7 @@ requires-python = ">=3.14"
 [manifest]
 members = [
     "image-processing",
+    "shared",
     "tutorial",
 ]
 
@@ -100,9 +101,9 @@ wheels = [
 ]
 
 [[package]]
-name = "tutorial"
+name = "shared"
 version = "0.1.0"
-source = { editable = "packages/tutorial" }
+source = { editable = "packages/shared" }
 dependencies = [
     { name = "numpy" },
     { name = "opencv-python" },
@@ -112,6 +113,23 @@ dependencies = [
 requires-dist = [
     { name = "numpy", specifier = ">=2.4.4" },
     { name = "opencv-python", specifier = ">=4.13.0.92" },
+]
+
+[[package]]
+name = "tutorial"
+version = "0.1.0"
+source = { editable = "packages/tutorial" }
+dependencies = [
+    { name = "numpy" },
+    { name = "opencv-python" },
+    { name = "shared" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=2.4.4" },
+    { name = "opencv-python", specifier = ">=4.13.0.92" },
+    { name = "shared", editable = "packages/shared" },
 ]
 
 [[package]]
