@@ -5,6 +5,7 @@ requires-python = ">=3.14"
 
 [tool.uv.sources]
 tutorial = { workspace = true }
+opencv = { workspace = true }
 shared = { workspace = true }
 
 [tool.uv.workspace]
