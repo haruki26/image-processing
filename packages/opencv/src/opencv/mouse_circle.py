@@ -66,6 +66,8 @@ def main() -> None:
             break
     cv2.destroyAllWindows()
 
+    image_manager.save_image(img, "mouse_circle.jpg")
+
 
 if __name__ == "__main__":
     main()

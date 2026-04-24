@@ -34,6 +34,8 @@ def main() -> None:
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+    image_manager.save_image(img, "circle_clip.png")
+
 
 if __name__ == "__main__":
     main()

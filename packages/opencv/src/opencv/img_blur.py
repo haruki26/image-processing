@@ -15,6 +15,8 @@ def main() -> None:
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+    image_manager.save_image(blurred_img, "ball_blurred.jpg")
+
 
 if __name__ == "__main__":
     main()

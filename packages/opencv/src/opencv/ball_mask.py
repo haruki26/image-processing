@@ -67,6 +67,8 @@ def main() -> None:
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
+    image_manager.save_image(mask, f"ball_mask_{color_type.value}.jpg")
+
 
 if __name__ == "__main__":
     main()

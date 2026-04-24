@@ -71,6 +71,8 @@ def main() -> None:
 
     cv2.destroyAllWindows()
 
+    image_manager.save_image(img, "ball_color_pickup.jpg")
+
 
 if __name__ == "__main__":
     main()

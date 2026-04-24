@@ -5,6 +5,8 @@ import numpy as np
 
 from shared.color import RGBColor
 
+from opencv.utils.image import image_manager
+
 WIDTH: Final[int] = 1280
 HEIGHT: Final[int] = 960
 GRID_SIZE: Final[int] = 80
@@ -20,6 +22,7 @@ CANVAS_BASE_COLOR: Final[RGBColor] = RGBColor(255, 255, 255)
 
 # Yellow
 CIRCLE_COLOR: Final[RGBColor] = RGBColor(255, 255, 0)
+# Blue
 CIRCLE_LINE_COLOR: Final[RGBColor] = RGBColor(0, 0, 255)
 
 
@@ -44,6 +47,8 @@ def main() -> None:
     cv2.imshow("Circle", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+    image_manager.save_image(img, "circle.png")
 
 
 if __name__ == "__main__":
