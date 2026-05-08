@@ -17,6 +17,9 @@ class ProcessedImageInfo:
     image_array: ImageArray
 
 
+type MainFn = Callable[[ImageArray], ProcessedImageInfo | tuple[ProcessedImageInfo, ...]]
+
+
 class Pipeline:
     image_manager: Final[ImageManager]
     image_name: Final[str | None]
@@ -50,10 +53,10 @@ class Pipeline:
 
     def process(
         self, image_name: str | None = None, *, is_show_image: bool = True, is_save_image: bool = True
-    ) -> Callable[[Callable[[ImageArray], tuple[ProcessedImageInfo, ...]]], Callable[[], None]]:
+    ) -> Callable[[MainFn], Callable[[], None]]:
 
         def decorator(
-            main_func: Callable[[ImageArray], ProcessedImageInfo | tuple[ProcessedImageInfo, ...]],
+            main_func: MainFn,
         ) -> Callable[[], None]:
 
             @wraps(main_func)
@@ -65,7 +68,6 @@ class Pipeline:
                     raise ValueError(msg)
 
                 img = self.image_manager.read_image(target_image_name)
-                file_type = target_image_name.rsplit(".", maxsplit=1)[-1].lower()
 
                 result = main_func(img)
                 for processed_image in (result,) if isinstance(result, ProcessedImageInfo) else result:
@@ -75,7 +77,7 @@ class Pipeline:
                     if is_save_image:
                         self.image_manager.save_image(
                             processed_image.image_array,
-                            f"{processed_image.image_name.replace(' ', '_').lower()}.{file_type}",
+                            f"{processed_image.image_name.replace(' ', '_').lower()}",
                         )
 
                 cv2.waitKey(0)
@@ -92,13 +94,8 @@ if __name__ == "__main__":
     pipe = Pipeline(images_dir=Path(__file__).parent.parent.parent.parent / "tutorial" / "images")
 
     @pipe.process("ktech.jpg")
-    def main(img: ImageArray) -> tuple[ProcessedImageInfo, ...]:
+    def main(img: ImageArray) -> ProcessedImageInfo:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        edges = cv2.Canny(gray, 100, 200)
-
-        return (
-            ProcessedImageInfo("Grayscale Image", gray),
-            ProcessedImageInfo("Edges Image", edges),
-        )
+        return pipe.create_processed_image_info("ktech_gray.jpg", gray)
 
     main()
