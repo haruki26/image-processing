@@ -139,6 +139,7 @@ def main() -> None:
         cv2.imshow("Ball Emphasis", display_img)
         if cv2.waitKey(1) & 0xFF == EXIT_KEY_CODE:  # ESC key
             break
+    image_manager.save_image(display_img, "ball_emphasis_result.jpg")
     cv2.destroyAllWindows()
 
 
