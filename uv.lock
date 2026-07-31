@@ -4,10 +4,28 @@ requires-python = ">=3.14"
 
 [manifest]
 members = [
+    "assignment",
     "image-processing",
     "opencv",
     "shared",
     "tutorial",
+]
+
+[[package]]
+name = "assignment"
+version = "0.1.0"
+source = { editable = "packages/assignment" }
+dependencies = [
+    { name = "numpy" },
+    { name = "opencv" },
+    { name = "shared" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "numpy", specifier = ">=2.4.4" },
+    { name = "opencv", editable = "packages/opencv" },
+    { name = "shared", editable = "packages/shared" },
 ]
 
 [[package]]
